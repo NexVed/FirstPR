@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "FirstPR system architecture",
+    "locale": "en",
+    "output": ".archify/architecture-firstpr-20261027-013006/firstpr-architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/NexVed/FirstPR.git",
+      "provider": "github",
+      "revision": "318e5f7df1753fde13a7e9fa2dfffb675271d5cf",
+      "link_mode": "web"
+    }
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "external",
+      "icon": "person",
+      "label": "Developer",
+      "sublabel": "Browser",
+      "pos": [24, 352],
+      "size": [104, 64],
+      "sources": [
+        { "path": "frontend/src/components/workspace/Workspace.tsx", "line": 36, "end_line": 51, "label": "sign-in UI" }
+      ]
+    },
+    {
+      "id": "nextapp",
+      "type": "frontend",
+      "label": "Next.js workspace",
+      "sublabel": "Bun · React Query",
+      "pos": [188, 336],
+      "size": [156, 96],
+      "sources": [
+        { "path": "frontend/next.config.ts", "line": 6, "end_line": 8, "label": "/api/v1 rewrite" },
+        { "path": "frontend/src/app/[[...slug]]/page.tsx", "line": 1, "end_line": 3, "label": "entry" },
+        { "path": "frontend/src/lib/api.ts", "line": 8, "end_line": 19, "label": "API client" }
+      ]
+    },
+    {
+      "id": "supabase_auth",
+      "type": "security",
+      "label": "Supabase Auth",
+      "sublabel": "Email provider",
+      "tag": "JWT",
+      "pos": [484, 96],
+      "size": [152, 84],
+      "sources": [
+        { "path": "frontend/src/components/workspace/Workspace.tsx", "line": 44, "end_line": 47, "label": "signInWithPassword" },
+        { "path": "frontend/src/lib/supabase.ts", "line": 5, "end_line": 11, "label": "anon client" }
+      ]
+    },
+    {
+      "id": "fastapi",
+      "type": "backend",
+      "label": "FastAPI API",
+      "sublabel": "uvicorn :8000 · /api/v1",
+      "pos": [484, 336],
+      "size": [152, 96],
+      "sources": [
+        { "path": "backend/app/main.py", "line": 55, "end_line": 106, "label": "app factory + CORS" },
+        { "path": "backend/app/api/router.py", "line": 15, "end_line": 22, "label": "route table" },
+        { "path": "backend/app/api/deps.py", "line": 41, "end_line": 55, "label": "bearer dependency" }
+      ]
+    },
+    {
+      "id": "analysis_svc",
+      "type": "backend",
+      "label": "Analysis service",
+      "sublabel": "repo scan → AI ranking",
+      "pos": [784, 204],
+      "size": [150, 88],
+      "sources": [
+        { "path": "backend/app/services/repository_service.py", "line": 45, "end_line": 102, "label": "pipeline" },
+        { "path": "backend/app/services/repository_service.py", "line": 162, "end_line": 180, "label": "persist result" }
+      ]
+    },
+    {
+      "id": "plan_svc",
+      "type": "backend",
+      "label": "Plan service",
+      "sublabel": "issue → plan draft",
+      "pos": [784, 340],
+      "size": [150, 88],
+      "sources": [
+        { "path": "backend/app/services/plan_service.py", "line": 32, "end_line": 108, "label": "generate + persist" }
+      ]
+    },
+    {
+      "id": "triage_svc",
+      "type": "backend",
+      "label": "Screenshot triage",
+      "sublabel": "image → diagnosis",
+      "pos": [784, 476],
+      "size": [150, 88],
+      "sources": [
+        { "path": "backend/app/services/triage_service.py", "line": 82, "end_line": 143, "label": "triage pipeline" },
+        { "path": "backend/app/api/routes/triage.py", "line": 24, "end_line": 55, "label": "upload route" }
+      ]
+    },
+    {
+      "id": "activity_svc",
+      "type": "backend",
+      "label": "Activity service",
+      "sublabel": "record + dashboard",
+      "pos": [784, 612],
+      "size": [150, 88],
+      "sources": [
+        { "path": "backend/app/services/activity_service.py", "line": 14, "end_line": 42, "label": "record + aggregate" }
+      ]
+    },
+    {
+      "id": "github",
+      "type": "external",
+      "label": "GitHub REST API",
+      "sublabel": "public repo data",
+      "pos": [1058, 204],
+      "size": [154, 88],
+      "sources": [
+        { "path": "backend/app/services/github_service.py", "line": 63, "end_line": 79, "label": "HTTPX client" },
+        { "path": "backend/app/services/repository_service.py", "line": 56, "end_line": 81, "label": "fetches" }
+      ]
+    },
+    {
+      "id": "llm",
+      "type": "external",
+      "label": "AI provider",
+      "sublabel": "Gemma or OpenAI-compatible",
+      "pos": [1058, 340],
+      "size": [154, 88],
+      "sources": [
+        { "path": "backend/app/main.py", "line": 30, "end_line": 52, "label": "provider choice" },
+        { "path": "backend/app/ai/gemma_provider.py", "line": 42, "end_line": 67, "label": "generateContent" }
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "Supabase Postgres",
+      "sublabel": "5 tables · RLS",
+      "pos": [1058, 540],
+      "size": [154, 112],
+      "sources": [
+        { "path": "backend/app/db/supabase.py", "line": 26, "end_line": 35, "label": "client factory" },
+        { "path": "backend/app/db/repositories.py", "line": 24, "end_line": 48, "label": "table access" },
+        { "path": "supabase/schema.sql", "line": 65, "end_line": 89, "label": "RLS" }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "FirstPR processes (this repo)",
+      "wraps": ["nextapp", "fastapi", "analysis_svc", "plan_svc", "triage_svc", "activity_svc"],
+      "pad": 12
+    },
+    {
+      "kind": "security-group",
+      "label": "Verified-user zone · server-only secrets",
+      "wraps": ["fastapi", "analysis_svc", "plan_svc", "triage_svc", "activity_svc"],
+      "pad": 12
+    }
+  ],
+  "connections": [
+    { "id": "open-app", "from": "users", "to": "nextapp", "label": "opens", "variant": "emphasis" },
+    { "id": "sign-in", "from": "nextapp", "to": "supabase_auth", "label": "email sign-in (anon key)", "variant": "security" },
+    { "id": "api-proxy", "from": "nextapp", "to": "fastapi", "label": "proxy /api/v1/*", "variant": "emphasis" },
+    { "id": "jwt-verify", "from": "fastapi", "to": "supabase_auth", "label": "verify JWT (JWKS/HS256)", "variant": "security" },
+    { "id": "r-analyze", "from": "fastapi", "to": "analysis_svc", "label": "analyze", "variant": "emphasis" },
+    { "id": "r-plan", "from": "fastapi", "to": "plan_svc", "label": "plans" },
+    { "id": "r-triage", "from": "fastapi", "to": "triage_svc", "label": "triage" },
+    { "id": "r-activity", "from": "fastapi", "to": "activity_svc", "label": "activity" },
+    { "id": "db-read", "from": "fastapi", "to": "db", "label": "list reads", "variant": "dashed" },
+    { "id": "an-gh", "from": "analysis_svc", "to": "github", "label": "repo + issues" },
+    { "id": "an-llm", "from": "analysis_svc", "to": "llm", "label": "AI scoring" },
+    { "id": "an-db", "from": "analysis_svc", "to": "db", "label": "save analysis" },
+    { "id": "pl-gh", "from": "plan_svc", "to": "github", "label": "issue + docs" },
+    { "id": "pl-llm", "from": "plan_svc", "to": "llm", "label": "draft plan" },
+    { "id": "pl-db", "from": "plan_svc", "to": "db", "label": "save plan" },
+    { "id": "tr-gh", "from": "triage_svc", "to": "github", "label": "tree + issues" },
+    { "id": "tr-llm", "from": "triage_svc", "to": "llm", "label": "vision analyze" },
+    { "id": "tr-db", "from": "triage_svc", "to": "db", "label": "save triage" },
+    { "id": "ac-db", "from": "activity_svc", "to": "db", "label": "insert + count" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Primary flow",
+      "items": [
+        "Browser signs in to Supabase Auth and keeps the JWT",
+        "Every API call: /api/v1/* client → Next.js rewrite → FastAPI bearer check",
+        "Analysis: GitHub fetches → two fixed AI calls → service-role insert + activity row"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Trust boundaries",
+      "items": [
+        "Browser holds only the anon key; service-role key + JWT secret stay in backend env",
+        "FastAPI verifies each bearer JWT: HS256 secret or JWKS (RS256/ES256)",
+        "Postgres RLS restricts rows to auth.uid(); API writes bypass RLS by design"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Unknown / not evidenced",
+      "items": [
+        "No call site does direct browser→Postgres reads, though RLS select policies would allow them",
+        "Only local dev topology documented (uvicorn + bun dev); hosting is unknown",
+        "Triage history route and per-user preference update routes do not exist yet"
+      ]
+    }
+  ]
+}

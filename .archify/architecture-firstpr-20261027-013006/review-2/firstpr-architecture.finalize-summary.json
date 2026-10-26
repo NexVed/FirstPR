@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\candidate.json",
+    "sha256": "ff278056dc6c0afedd4f66c816bb2663d72f5cb5fbcd7db66930449fdb26b129",
+    "bytes": 8696
+  },
+  "artifact": {
+    "path": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\firstpr-architecture.html",
+    "sha256": "4f30e3352729617933b2792d6dbf99681198b12c4f388eedbb41d27d05c21800",
+    "bytes": 867855
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\review-2\\firstpr-architecture.finalize.json",
+    "summaryReceipt": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\review-2\\firstpr-architecture.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\review-2\\firstpr-architecture.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-26T20:02:05.222Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5700,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 9,
+      "routesOverSuggestedBends": 4,
+      "routesOverSuggestedStretch": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "r-analyze",
+            "from": "fastapi",
+            "to": "analysis_svc",
+            "label": "analyze",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "right": {
+            "id": "r-plan",
+            "from": "fastapi",
+            "to": "plan_svc",
+            "label": "plans",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            620,
+            312
+          ],
+          "sharedNode": "fastapi"
+        },
+        {
+          "left": {
+            "id": "r-analyze",
+            "from": "fastapi",
+            "to": "analysis_svc",
+            "label": "analyze",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "right": {
+            "id": "tr-gh",
+            "from": "triage_svc",
+            "to": "github",
+            "label": "tree + issues",
+            "collectionIndex": 15,
+            "artifactIndex": 16
+          },
+          "point": [
+            781,
+            276
+          ]
+        },
+        {
+          "left": {
+            "id": "r-plan",
+            "from": "fastapi",
+            "to": "plan_svc",
+            "label": "plans",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "right": {
+            "id": "tr-gh",
+            "from": "triage_svc",
+            "to": "github",
+            "label": "tree + issues",
+            "collectionIndex": 15,
+            "artifactIndex": 16
+          },
+          "point": [
+            781,
+            384
+          ]
+        },
+        {
+          "left": {
+            "id": "an-llm",
+            "from": "analysis_svc",
+            "to": "llm",
+            "label": "AI scoring",
+            "collectionIndex": 10,
+            "artifactIndex": 11
+          },
+          "right": {
+            "id": "pl-gh",
+            "from": "plan_svc",
+            "to": "github",
+            "label": "issue + docs",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "point": [
+            1034,
+            316
+          ]
+        },
+        {
+          "left": {
+            "id": "an-db",
+            "from": "analysis_svc",
+            "to": "db",
+            "label": "save analysis",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "pl-gh",
+            "from": "plan_svc",
+            "to": "github",
+            "label": "issue + docs",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "point": [
+            958,
+            333
+          ]
+        },
+        {
+          "left": {
+            "id": "an-db",
+            "from": "analysis_svc",
+            "to": "db",
+            "label": "save analysis",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "pl-llm",
+            "from": "plan_svc",
+            "to": "llm",
+            "label": "draft plan",
+            "collectionIndex": 13,
+            "artifactIndex": 14
+          },
+          "point": [
+            1026,
+            384
+          ]
+        },
+        {
+          "left": {
+            "id": "an-db",
+            "from": "analysis_svc",
+            "to": "db",
+            "label": "save analysis",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "pl-db",
+            "from": "plan_svc",
+            "to": "db",
+            "label": "save plan",
+            "collectionIndex": 14,
+            "artifactIndex": 15
+          },
+          "point": [
+            1026,
+            452
+          ],
+          "sharedNode": "db"
+        },
+        {
+          "left": {
+            "id": "an-db",
+            "from": "analysis_svc",
+            "to": "db",
+            "label": "save analysis",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "right": {
+            "id": "tr-llm",
+            "from": "triage_svc",
+            "to": "llm",
+            "label": "vision analyze",
+            "collectionIndex": 16,
+            "artifactIndex": 17
+          },
+          "point": [
+            1027.2222222222222,
+            513
+          ]
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "r-plan",
+            "from": "fastapi",
+            "to": "plan_svc",
+            "label": "plans",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1.186
+        },
+        {
+          "relationship": {
+            "id": "an-db",
+            "from": "analysis_svc",
+            "to": "db",
+            "label": "save analysis",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 4,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "pl-gh",
+            "from": "plan_svc",
+            "to": "github",
+            "label": "issue + docs",
+            "collectionIndex": 12,
+            "artifactIndex": 13
+          },
+          "bends": 3,
+          "stretch": 1
+        },
+        {
+          "relationship": {
+            "id": "tr-gh",
+            "from": "triage_svc",
+            "to": "github",
+            "label": "tree + issues",
+            "collectionIndex": 15,
+            "artifactIndex": 16
+          },
+          "bends": 4,
+          "stretch": 1.401
+        }
+      ],
+      "truncated": true
+    },
+    "hints": [
+      "fastapi → analysis_svc and fastapi → plan_svc cross next to fastapi: move node analysis_svc or plan_svc so the two reach fastapi from different sides (for example one level with it, one directly above or below it).",
+      "fastapi → analysis_svc crosses triage_svc → github: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "fastapi → plan_svc crosses triage_svc → github: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "analysis_svc → llm crosses plan_svc → github: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "analysis_svc → db crosses plan_svc → github: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "analysis_svc → db crosses plan_svc → llm: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor.",
+      "analysis_svc → db and plan_svc → db cross next to db: move node analysis_svc or plan_svc so the two reach db from different sides (for example one level with it, one directly above or below it).",
+      "analysis_svc → db crosses triage_svc → llm: move the node of whichever is a branch, return, or second entrance to the other side of the main path, so that relationship runs through an empty corridor."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

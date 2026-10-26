@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ed129a64-22c8-4483-9710-51d26e07fb17",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\candidate.json",
+  "output": "C:\\Users\\u9780\\FirstPR\\.archify\\architecture-firstpr-20261027-013006\\firstpr-architecture.html",
+  "specification": {
+    "sha256": "3c8442a56c262c13a315cac29f4aa0c446f7ecf00da06ebe8ececff549d81c8b",
+    "bytes": 8584
+  },
+  "artifact": {
+    "sha256": "3d7552fdece05522e56deaa2de48480c3920348773edb6bfa10a92602c3073c6",
+    "bytes": 867494
+  }
+}

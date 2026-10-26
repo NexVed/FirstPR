@@ -2,9 +2,13 @@
 
 <img src="frontend/public/firstpr-logo.png" alt="FirstPR logo" width="96" />
 
+**Find your first contribution in a real GitHub repository.**
+
 FirstPR helps new contributors explore public GitHub repositories. It reads repository documentation and open issues, recommends possible starting points when AI is available, generates contribution plans, and turns bug screenshots into issue drafts.
 
 The app uses a Next.js 16 / React 19 frontend, a FastAPI backend, Supabase for authentication and saved data, GitHub's API for repository facts, and Gemma or a configured open-weight model for AI features. Bun runs the frontend. There is no seeded or mock repository data in the UI.
+
+[Features](#features) · [Architecture](#architecture) · [Local setup](#local-setup) · [API routes](#api-routes) · [Troubleshooting](#troubleshooting-and-current-limits)
 
 ## Features
 
@@ -20,19 +24,11 @@ FirstPR does not post GitHub issues or create pull requests for you.
 
 ## Architecture
 
-```text
-Browser (Next.js)
-  ├─ Supabase Auth: email sign-up and sign-in
-  └─ /api/v1/* with the user's Supabase access token
-           ↓ Next.js rewrite
-FastAPI
-  ├─ verifies the access token
-  ├─ reads public repositories through the GitHub API
-  ├─ validates AI output and suggested file paths
-  └─ stores results and activity in Supabase
-```
+![FirstPR architecture: the Next.js workspace connects through FastAPI to GitHub, an AI provider, and Supabase](docs/images/firstpr-system-architecture.png)
 
-The browser uses only the Supabase publishable/anon key. FastAPI uses the service-role key for database writes and filters saved records by the authenticated user ID. Keep the service-role key, JWT secret, and AI key on the backend.
+[View the architecture diagram at full size](docs/images/firstpr-system-architecture.png).
+
+The browser uses only the Supabase publishable/anon key. Next.js forwards authenticated API requests to FastAPI, which reads GitHub data, calls the configured AI provider, and saves results in Supabase. FastAPI uses the service-role key for database writes and filters saved records by the authenticated user ID. Keep the service-role key, JWT secret, and AI key on the backend.
 
 ## Requirements
 
